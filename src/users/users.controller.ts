@@ -26,7 +26,6 @@ export class UserController {
 
   }
 
-
   // request payload - defining the structure of the body 
   @Patch('/update')
 
