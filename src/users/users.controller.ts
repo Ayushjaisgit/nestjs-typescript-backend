@@ -1,4 +1,14 @@
-import { Module, Controller, Get, Post, Req, Param, Body, Patch } from '@nestjs/common';
+import {
+  Module,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Param,
+  Body,
+  Patch,
+  HttpCode,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { updateUserDto } from './dto/user-update.dto';
 
@@ -9,35 +19,32 @@ import { updateUserDto } from './dto/user-update.dto';
 export class UserController {
   constructor(private readonly userService: UsersService) {}
 
+  @HttpCode(204)
   @Get('/users')
   getHello(): string {
     return this.userService.getHello();
   }
-  
+
   @Get('/olll')
   getlello(): string {
     return this.userService.getHello();
-  }  
-
-  @Post('/status/')
-  store(@Req() req:Request, @Param() params:{userId:number} , @Body() body:any ){
-    return {user: body, age: params };
-    // return  body
-
   }
 
-  // request payload - defining the structure of the body 
+  @Post('/status/')
+  store(
+    @Req() req: Request,
+    @Param() params: { userId: number },
+    @Body() body: any,
+  ) {
+    return { user: body, age: params };
+    // return  body
+  }
+
+  // request payload - defining the structure of the body
   @Patch('/update')
-
-  update(@Body() updateUserDto:updateUserDto ){
-
-    return  updateUserDto;
-
+  update(@Body() updateUserDto: updateUserDto) {
+    return updateUserDto;
   }
 }
 
-
 export class Userscontroller {}
-
-
-
